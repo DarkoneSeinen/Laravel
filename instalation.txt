@@ -1,0 +1,25 @@
+PHP (si no está instalado)
+   sudo apt update
+   sudo apt install php php-cli php-fpm php-mysql php-mbstring php-xml php-zip php-curl
+
+Composer (gestor de dependencias de PHP)
+   curl -sS https://getcomposer.org/installer | php
+   sudo mv composer.phar /usr/local/bin/composer
+   chmod +x /usr/local/bin/composer
+
+Verificar que está instalado
+   php --version
+   composer --version
+
+Instalar Laravel globalmente (opcional pero recomendado)
+   composer global require laravel/installer
+
+crear proyecto laravel
+   cd /workspaces
+   laravel new nombre-proyecto
+   # O si no está instalado globalmente:
+   composer create-project laravel/laravel nombre-proyecto
+
+   dependencias:
+      cd nombre-proyecto
+      composer install
