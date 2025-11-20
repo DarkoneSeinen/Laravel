@@ -23,3 +23,25 @@ crear proyecto laravel
    dependencias:
       cd nombre-proyecto
       composer install
+
+///base de datos phpmyadmin
+cd /workspaces/Laravel/laravel-project
+
+docker-compose up -d --build
+
+Genera la clave de aplicación (si aún no la tienes): docker-compose exec app php artisan key:generate
+
+Ejecuta las migraciones de base de datos: docker-compose exec app php artisan migrate
+
+comandos utiles:
+# Ver logs
+docker-compose logs -f
+
+# Ejecutar comandos artisan
+docker-compose exec app php artisan <comando>
+
+# Acceder a la consola de Laravel
+docker-compose exec app php artisan tinker
+
+# Detener los contenedores
+docker-compose down
