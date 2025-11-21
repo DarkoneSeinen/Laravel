@@ -50,17 +50,41 @@ LEVANTAR EL PROYECTO DESPUÉS DE INSTALAR DEPENDENCIAS
 COMANDOS ÚTILES
 ═══════════════════════════════════════════════════════════════
 
+# Ver estado de todos los contenedores
+docker-compose ps
+
 # Ver logs del contenedor en tiempo real
 docker-compose logs -f
 
 # Ver logs solo del contenedor app
 docker-compose logs -f app
 
+# Ver logs del nginx
+docker-compose logs -f nginx
+
+# Ver logs de la base de datos
+docker-compose logs -f db
+
 # Ejecutar comandos artisan
 docker-compose exec app php artisan <comando>
 
 # Acceder a la consola de Laravel (Tinker)
 docker-compose exec app php artisan tinker
+
+# Ejecutar migraciones sin seed
+docker-compose exec app php artisan migrate
+
+# Ejecutar migraciones con seed
+docker-compose exec app php artisan migrate --seed
+
+# Hacer rollback de migraciones
+docker-compose exec app php artisan migrate:rollback
+
+# Ejecutar seeders específicos
+docker-compose exec app php artisan db:seed --class=<NombreSeed>
+
+# Limpiar caché
+docker-compose exec app php artisan cache:clear
 
 # Detener los contenedores
 docker-compose down
@@ -72,6 +96,11 @@ docker-compose down -v
 docker-compose up -d --build --no-cache
 
 # Acceder a PHPMyAdmin
-http://localhost:8081
-# Usuario: root
-# Contraseña: root
+http://localhost:8080
+# Usuario: laravel
+# Contraseña: laravel_password
+
+# Ver la aplicación Laravel en el navegador
+https://jubilant-train-jjwjxv5qj4w52qv9v-8000.app.github.dev/
+
+///>>>composer require laravel/ui "1.0" --dev
