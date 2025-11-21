@@ -41,6 +41,6 @@ RUN useradd -m -u 1000 laravel && chown -R laravel:laravel /var/www
 
 USER laravel
 
-EXPOSE 8000
+EXPOSE 9000
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD ["php-fpm"]
