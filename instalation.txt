@@ -1,47 +1,77 @@
-PHP (si no está instalado)
+═══════════════════════════════════════════════════════════════
+INSTALACIÓN INICIAL EN CODESPACES (cada vez que cambies de Codespace)
+═══════════════════════════════════════════════════════════════
+
+1. Instalar PHP y extensiones necesarias:
    sudo apt update
    sudo apt install php php-cli php-fpm php-mysql php-mbstring php-xml php-zip php-curl
 
-Composer (gestor de dependencias de PHP)
+2. Instalar Composer:
    curl -sS https://getcomposer.org/installer | php
    sudo mv composer.phar /usr/local/bin/composer
    chmod +x /usr/local/bin/composer
 
-Verificar que está instalado
+3. Instalar Docker (generalmente ya viene en Codespaces):
+   # Verificar si Docker está instalado:
+   docker --version
+   docker-compose --version
+
+4. Verificar que todo está instalado:
    php --version
    composer --version
+   docker --version
 
-Instalar Laravel globalmente (opcional pero recomendado)
+5. Instalar Laravel globalmente (opcional pero recomendado):
    composer global require laravel/installer
 
-crear proyecto laravel
-   cd /workspaces
-   laravel new nombre-proyecto
-   # O si no está instalado globalmente:
-   composer create-project laravel/laravel nombre-proyecto
+═══════════════════════════════════════════════════════════════
+LEVANTAR EL PROYECTO DESPUÉS DE INSTALAR DEPENDENCIAS
+═══════════════════════════════════════════════════════════════
 
-   dependencias:
-      cd nombre-proyecto
-      composer install
+1. Navegar al directorio del proyecto:
+   cd /workspaces/Laravel/laravel-project
 
-///base de datos phpmyadmin
-cd /workspaces/Laravel/laravel-project
+2. Construir y levantar los contenedores Docker:
+   docker-compose up -d --build
 
-docker-compose up -d --build
+3. Instalar dependencias de Composer (dentro del contenedor):
+   docker-compose exec app composer install
 
-Genera la clave de aplicación (si aún no la tienes): docker-compose exec app php artisan key:generate
+4. Generar la clave de aplicación:
+   docker-compose exec app php artisan key:generate
 
-Ejecuta las migraciones de base de datos: docker-compose exec app php artisan migrate
+5. Ejecutar las migraciones de base de datos:
+   docker-compose exec app php artisan migrate --seed
 
-comandos utiles:
-# Ver logs
+6. Verificar que todo está funcionando:
+   docker-compose logs -f
+
+═══════════════════════════════════════════════════════════════
+COMANDOS ÚTILES
+═══════════════════════════════════════════════════════════════
+
+# Ver logs del contenedor en tiempo real
 docker-compose logs -f
+
+# Ver logs solo del contenedor app
+docker-compose logs -f app
 
 # Ejecutar comandos artisan
 docker-compose exec app php artisan <comando>
 
-# Acceder a la consola de Laravel
+# Acceder a la consola de Laravel (Tinker)
 docker-compose exec app php artisan tinker
 
 # Detener los contenedores
 docker-compose down
+
+# Detener y eliminar volúmenes (CUIDADO: borra la BD)
+docker-compose down -v
+
+# Reconstruir sin usar caché
+docker-compose up -d --build --no-cache
+
+# Acceder a PHPMyAdmin
+http://localhost:8081
+# Usuario: root
+# Contraseña: root
