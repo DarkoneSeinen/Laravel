@@ -12,6 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         //
+        $middleware->trustProxies(at: '*'); //permite el acceso de todas las IPs
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
