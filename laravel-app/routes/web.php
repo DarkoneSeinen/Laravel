@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/nuevavista', function () { // Nueva ruta para la nueva vista
+    return view('nuevavista');
+});
