@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\UserController; // no olvidar importar el controlador
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/nuevavista', function () { // Nueva ruta para la nueva vista
+/*Route::get('/nuevavista', function () { // Nueva ruta para la nueva vista
     return view('nuevavista');
 });
+
+Route::get('/saludo/{nombre}', function ($nombre) { // ruta con parámetro
+    return "hola, $nombre";
+});
+*/
+
+//crear controlador
+Route::get('/usuarios',[UserController::class, 'index2']); //ruta que usa el controlador para mostrar usuarios
