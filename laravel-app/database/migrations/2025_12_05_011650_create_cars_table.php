@@ -14,9 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cars', function (Blueprint $table) {
+
             $table->id();
+            $table->string('make');
+            $table->string('model');
+            $table->year('year');
+            $table->string('color');
             $table->timestamps();
+  
         });
+
+        DB::table('cars')->insert([
+            ['make' => 'Toyota', 'model' => 'Camry', 'year' => 2020, 'color' => 'Blue'],
+            ['make' => 'Honda', 'model' => 'Civic', 'year' => 2019, 'color' => 'Red'],
+            ['make' => 'Ford', 'model' => 'Mustang', 'year' => 2021, 'color' => 'Black'],
+        ]);
     }
 
     /**
