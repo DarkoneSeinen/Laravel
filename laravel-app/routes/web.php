@@ -2,6 +2,7 @@
 use App\Http\Controllers\UserController; // no olvidar importar el controlador
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,8 @@ Route::get('/saludo/{nombre}', function ($nombre) { // ruta con parámetro
 
 //crear controlador
 //Route::get('/usuarios',[UserController::class, 'index2']); //ruta que usa el controlador para mostrar usuarios
+
+Route::get('/autos', [CarController::class, 'index']); 
+
 
 Route::get('/libros', [BookController::class, 'index']);
