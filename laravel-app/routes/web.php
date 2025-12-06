@@ -15,6 +15,12 @@ use App\Http\Controllers\CarController;
 |
 */
 
+Route::middleware(['admin']) ->group(function () {
+    // Rutas que requieren verificación de administrador
+    Route::get('/autos', [CarController::class, 'index']);
+
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -30,8 +36,6 @@ Route::get('/saludo/{nombre}', function ($nombre) { // ruta con parámetro
 
 //crear controlador
 //Route::get('/usuarios',[UserController::class, 'index2']); //ruta que usa el controlador para mostrar usuarios
-
-Route::get('/autos', [CarController::class, 'index']); 
 
 
 Route::get('/libros', [BookController::class, 'index']);
